@@ -62,13 +62,13 @@ const Navbar = () => {
           </div>
           <div className="hidden md:flex items-center space-x-4">
             <Link
-              href="/login"
+              href="/auth/login"
               className="bg-blue-600 text-white px-3 py-2 rounded-md align"
             >
               Login
             </Link>
             <Link
-              href="/register"
+              href="/auth/register"
               className="bg-gray-200 text-gray-800 px-3 py-2 rounded-md"
             >
               Register
