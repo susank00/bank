@@ -9,32 +9,6 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Header */}
-      <header className="bg-blue-900 text-white py-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">BankSoft</h1>
-          <nav>
-            <ul className="flex space-x-6">
-              <li>
-                <a href="#features" className="hover:text-gray-300">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="hover:text-gray-300">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="hover:text-gray-300">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section className="bg-blue-100 py-20">
         <div className="container mx-auto text-center">

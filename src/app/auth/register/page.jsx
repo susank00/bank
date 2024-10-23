@@ -34,14 +34,14 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold text-center text-gray-800">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-400 via-purple-400 to-pink-500">
+      <div className="bg-white p-8 rounded-lg shadow-xl w-96">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
           Register
         </h2>
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         {success && <p className="text-green-500 text-sm mt-2">{success}</p>}
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-4 space-y-6">
           <div>
             <label className="block text-gray-700">Username</label>
             <input
@@ -49,7 +49,7 @@ const Register = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 text-red-800"
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
             />
           </div>
           <div>
@@ -59,7 +59,7 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 text-red-800"
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
             />
           </div>
           <div>
@@ -69,19 +69,19 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 text-red-800"
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-500 transition duration-200"
+            className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white p-3 rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-md"
           >
             Register
           </button>
         </form>
         <p className="mt-4 text-center text-gray-600">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-600">
+          <a href="/auth/login" className="text-blue-600 hover:underline">
             Login
           </a>
         </p>

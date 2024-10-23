@@ -34,6 +34,7 @@ export const authenticate = (handler) => {
 
       // Attach user info to the request object
       request.user = decoded;
+      console.log(decoded);
 
       // Pass the modified request to the original handler
       return handler(request);

@@ -11,11 +11,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="max-w-7xl  px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center ">
-            <Link href="/" className="text-4xl font-bold text-blue-800 ml-0">
+    <nav className="bg-slate-500  ">
+      <div className="max-w-7xl  px-4 sm:px-6 lg:px-8 ">
+        <div className="flex items-center justify-between h-16 ">
+          <div className="flex items-center">
+            <Link href="/" className="text-4xl font-bold text-blue-800 ">
               Nepal Bank
             </Link>
             <div className="hidden md:flex space-x-4 ml-10">
@@ -60,7 +60,9 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="hidden md:flex items-center space-x-4">
+
+          {/* Login and Register buttons aligned to the right */}
+          <div className="hidden md:flex space-x-4 ">
             <Link
               href="/auth/login"
               className="bg-blue-600 text-white px-3 py-2 rounded-md align"
@@ -74,6 +76,7 @@ const Navbar = () => {
               Register
             </Link>
           </div>
+
           <div className="md:hidden">
             <button
               type="button"

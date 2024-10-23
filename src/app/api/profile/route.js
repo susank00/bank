@@ -8,7 +8,12 @@ export const GET = authenticate(async (request) => {
   return new Response(
     JSON.stringify({
       message: "Profile fetched successfully!",
-      user: { id: user.userId, email: user.email, username: user.username },
+      user: {
+        id: user.userId,
+        email: user.email,
+        username: user.username,
+        accountNumber: user.accountNumber,
+      },
     }),
     { status: 200, headers: { "Content-Type": "application/json" } }
   );

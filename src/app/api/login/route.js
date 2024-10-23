@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "@/Lib/Postgredb"; // Adjust the import based on your structure
 
-const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret"; // Use a strong secret
+const JWT_SECRET = process.env.JWT_SECRET; // Use a strong secret
 
 export async function POST(request) {
   try {

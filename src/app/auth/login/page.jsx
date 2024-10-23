@@ -36,31 +36,57 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="mb-4 text-2xl">Login</h1>
-      <form onSubmit={handleLogin} className="flex flex-col space-y-4">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="p-2 border border-gray-300 rounded text-red-900"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="p-2 border border-gray-300 rounded text-red-900"
-        />
-        <button type="submit" className="p-2 text-white bg-blue-500 rounded">
-          Login
-        </button>
-      </form>
-      {error && <p className="mt-4 text-red-500">{error}</p>}
-      {message && <p className="mt-4 text-green-500">{message}</p>}
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-400 via-purple-400 to-pink-500">
+      <div className="bg-white shadow-2xl rounded-lg p-8 max-w-md w-full space-y-8">
+        <h1 className="text-3xl font-bold text-gray-800 text-center">Login</h1>
+
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div>
+            <input
+              type="email"
+              placeholder="Email"
+              n-p
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent block text-gray-700"
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent block text-gray-700"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full p-3  text-white bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-lg shadow-lg transition-all duration-300"
+          >
+            {message ? "Logging in..." : "Login"}
+          </button>
+          <p className="mt-4 text-center text-gray-600">
+            Don't have an account?{" "}
+            <a href="/auth/register" className="text-blue-600 hover:underline">
+              Register here
+            </a>
+          </p>
+        </form>
+
+        {error && (
+          <p className="mt-4 text-red-500 text-center bg-red-100 p-2 rounded-lg">
+            {error}
+          </p>
+        )}
+        {message && (
+          <p className="mt-4 text-green-500 text-center bg-green-100 p-2 rounded-lg">
+            {message}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
