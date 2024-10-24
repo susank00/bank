@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter from Next.js
+import { useAuth } from "../../context/AuthContext"; // Import the AuthContext
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -10,28 +11,24 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
 
   const router = useRouter(); // Initialize useRouter
+  const { handleLogin } = useAuth(); // Access the handleLogin function from the AuthContext
 
-  const handleLogin = async (e) => {
+  const onLogin = async (e) => {
     e.preventDefault();
     setError("");
     setMessage("");
 
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      // Call handleLogin from context, which handles the login logic
+      const data = await handleLogin({ email, password });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      setError(data.message);
-    } else {
-      setMessage(data.message);
-      console.log(data.user); // Optional: log user info for debugging
-
-      // Redirect to the profile page after successful login
-      router.push("/profile"); // Redirect to the profile page
+      // Assuming handleLogin returns the data after successful login
+      if (data) {
+        setMessage("Login successful! Redirecting...");
+        router.push("/profile"); // Redirect to the profile page
+      }
+    } catch (err) {
+      setError(err.message || "Login failed. Please try again.");
     }
   };
 
@@ -40,12 +37,11 @@ export default function LoginPage() {
       <div className="bg-white shadow-2xl rounded-lg p-8 max-w-md w-full space-y-8">
         <h1 className="text-3xl font-bold text-gray-800 text-center">Login</h1>
 
-        <form onSubmit={handleLogin} className="space-y-6">
+        <form onSubmit={onLogin} className="space-y-6">
           <div>
             <input
               type="email"
               placeholder="Email"
-              n-p
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -64,7 +60,7 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
-            className="w-full p-3  text-white bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-lg shadow-lg transition-all duration-300"
+            className="w-full p-3 text-white bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-lg shadow-lg transition-all duration-300"
           >
             {message ? "Logging in..." : "Login"}
           </button>

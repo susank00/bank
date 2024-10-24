@@ -1,104 +1,51 @@
-"use client";
-// components/Navbar.js
-import { useState } from "react";
+"use client"; // For client-side components in Next.js 13+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext"; // Import the context
 
 const Navbar = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user, handleLogout } = useAuth(); // Access user and logout from context
+  const router = useRouter();
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
+  const onLogout = async () => {
+    await handleLogout();
+    router.push("/auth/login");
   };
 
   return (
-    <nav className="bg-slate-500  ">
-      <div className="max-w-7xl  px-4 sm:px-6 lg:px-8 ">
-        <div className="flex items-center justify-between h-16 ">
-          <div className="flex items-center">
-            <Link href="/" className="text-4xl font-bold text-blue-800 ">
-              Nepal Bank
-            </Link>
-            <div className="hidden md:flex space-x-4 ml-10">
-              <Link href="/" className="text-gray-800 hover:text-blue-600">
-                Home
-              </Link>
-              <Link
-                href="/services"
-                className="text-gray-800 hover:text-blue-600"
-              >
-                Services
-              </Link>
-              <div className="relative">
+    <nav className="bg-slate-500">
+      <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="text-4xl font-bold text-blue-800">
+            Nepal Bank
+          </Link>
+          <div className="flex space-x-4">
+            {user ? (
+              <>
+                <span className="text-gray-800">Welcome, {user.username}</span>
                 <button
-                  onClick={toggleDropdown}
-                  className="text-gray-800 hover:text-blue-600 focus:outline-none"
+                  onClick={onLogout}
+                  className="bg-red-600 text-white px-3 py-2 rounded-md"
                 >
-                  More
+                  Logout
                 </button>
-                {dropdownOpen && (
-                  <div className="absolute right-0 z-10 mt-2 w-48 bg-white rounded-md shadow-lg">
-                    <Link
-                      href="/about"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      About Us
-                    </Link>
-                    <Link
-                      href="/contact"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      Contact
-                    </Link>
-                    <Link
-                      href="/faq"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      FAQ
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Login and Register buttons aligned to the right */}
-          <div className="hidden md:flex space-x-4 ">
-            <Link
-              href="/auth/login"
-              className="bg-blue-600 text-white px-3 py-2 rounded-md align"
-            >
-              Login
-            </Link>
-            <Link
-              href="/auth/register"
-              className="bg-gray-200 text-gray-800 px-3 py-2 rounded-md"
-            >
-              Register
-            </Link>
-          </div>
-
-          <div className="md:hidden">
-            <button
-              type="button"
-              className="text-gray-800 focus:outline-none"
-              // Toggle mobile menu logic (not implemented in this snippet)
-            >
-              {/* Menu icon for mobile view */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
-            </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="bg-blue-600 text-white px-3 py-2 rounded-md"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/auth/register"
+                  className="bg-gray-200 text-gray-800 px-3 py-2 rounded-md"
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
