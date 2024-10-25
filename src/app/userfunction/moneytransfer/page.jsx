@@ -7,11 +7,11 @@ import { useRouter } from "next/navigation";
 import Sidebar from "@/app/components/Sidebar";
 
 export default function TransferForm() {
-  const { user, accountNumber } = useAuth();
+  const { user, username, accountNumber } = useAuth();
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    username: user.username ? user.username : "", // Set initial username from user context
+    userName: username ? username : "", // Set initial username from user context
     sourceAccountNumber: accountNumber ? accountNumber : "", // Set initial account number
     targetAccountNumber: "",
     transferAmount: "",
@@ -19,7 +19,7 @@ export default function TransferForm() {
 
   const [responseMessage, setResponseMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  //   console.log(user.username);
+  //   console.log(username);
   //   console.log(accountNumber);
 
   useEffect(() => {
@@ -41,12 +41,16 @@ export default function TransferForm() {
     setIsLoading(true);
     setResponseMessage("");
 
+    // if (response.ok){
+    //     targetAccountNumber: "",
+    //     transferAmount: "",
+    // }
     try {
       const response = await fetch("/api/customer/moneytransfer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: formData.username,
+          userName: formData.userName,
           sourceAccountNumber: formData.sourceAccountNumber,
           targetAccountNumber: formData.targetAccountNumber,
           transferAmount: parseFloat(formData.transferAmount),
@@ -55,6 +59,11 @@ export default function TransferForm() {
 
       const result = await response.json();
       if (response.ok) {
+        setFormData((prevData) => ({
+          ...prevData,
+          targetAccountNumber: "", // Reset target account number
+          transferAmount: "", // Reset transfer amount
+        }));
         setResponseMessage(`Success: ${result.message}`);
       } else {
         setResponseMessage(`Error: ${result.message}`);
@@ -79,7 +88,7 @@ export default function TransferForm() {
             <input
               type="text"
               name="username"
-              value={formData.username}
+              value={formData.userName}
               onChange={handleChange}
               className="w-full border border-gray-300 p-2 rounded"
               readOnly // Make the username field read-only

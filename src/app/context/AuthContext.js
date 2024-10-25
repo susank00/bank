@@ -8,6 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [accountNumber, setAccountNumber] = useState(null); // New state for account number
+  const [username, setUserName] = useState(null); // New state for account number
 
   const fetchUserSession = async () => {
     try {
@@ -21,18 +22,22 @@ export const AuthProvider = ({ children }) => {
         if (data.success && data.user) {
           setUser(data.user);
           setAccountNumber(data.user.accountNumber); // Set account number from user data
+          setUserName(data.user.username); // Set account number from user data
         } else {
           setUser(null);
           setAccountNumber(null);
+          setUserName(null);
         }
       } else {
         setUser(null);
         setAccountNumber(null);
+        setUserName(null);
       }
     } catch (error) {
       console.error("Failed to fetch user session", error);
       setUser(null);
       setAccountNumber(null);
+      setUserName(null);
     }
   };
 
@@ -54,6 +59,8 @@ export const AuthProvider = ({ children }) => {
     const data = await response.json();
     setUser(data.user);
     setAccountNumber(data.user.accountNumber); // Set account number on login
+    setUserName(data.user.username);
+
     return data;
   };
 
@@ -61,6 +68,7 @@ export const AuthProvider = ({ children }) => {
     await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
     setUser(null);
     setAccountNumber(null); // Clear account number on logout
+    setUserName(null);
   };
 
   useEffect(() => {
@@ -69,7 +77,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, accountNumber, handleLogin, handleLogout }}
+      value={{ user, username, accountNumber, handleLogin, handleLogout }}
     >
       {children}
     </AuthContext.Provider>

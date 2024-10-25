@@ -3,12 +3,12 @@ import prisma from "@/Lib/Postgredb"; // Custom Prisma client
 import { authenticate } from "@/middlewares/auth"; // Authentication middleware
 
 const transferBalanceHandler = async (request) => {
-  const { username, sourceAccountNumber, targetAccountNumber, transferAmount } =
+  const { userName, sourceAccountNumber, targetAccountNumber, transferAmount } =
     await request.json();
 
   // Validate input
   if (
-    !username ||
+    !userName ||
     !sourceAccountNumber ||
     !targetAccountNumber ||
     typeof transferAmount !== "number"
@@ -35,7 +35,7 @@ const transferBalanceHandler = async (request) => {
     const user = await prisma.user.findUnique({
       where: {
         accountNumber: sourceAccountNumber,
-        username,
+        username: userName,
       },
     });
 
