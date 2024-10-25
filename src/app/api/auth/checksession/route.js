@@ -26,8 +26,12 @@ export async function GET(req) {
     return new Response(
       JSON.stringify({
         success: true,
-        user: { id: decoded.id, username: decoded.username }, // Customize based on your token data
+        user: {
+          accountNumber: decoded.accountNumber,
+          username: decoded.username,
+        }, // Customize based on your token data
       }),
+
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (error) {
