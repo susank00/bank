@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter from Next.js
 import { useAuth } from "../../context/AuthContext"; // Import the AuthContext
 
@@ -11,8 +11,12 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
 
   const router = useRouter(); // Initialize useRouter
-  const { handleLogin } = useAuth(); // Access the handleLogin function from the AuthContext
-
+  const { handleLogin, user } = useAuth(); // Access the handleLogin function from the AuthContext
+  useEffect(() => {
+    if (user) {
+      router.push("/profile"); // Redirect to the profile page if user is logged in
+    }
+  }, [user, router]);
   const onLogin = async (e) => {
     e.preventDefault();
     setError("");

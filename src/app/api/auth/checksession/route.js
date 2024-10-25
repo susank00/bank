@@ -3,7 +3,7 @@
 import { parse } from "cookie";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret"; // Use a strong secret
+const JWT_SECRET = process.env.JWT_SECRET; // Use a strong secret
 
 // Named export for the GET method
 export async function GET(req) {

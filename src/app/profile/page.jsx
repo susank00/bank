@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Image from "next/image";
 import Link from "next/link"; // Next.js Link
+import { useRouter } from "next/navigation";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const router = useRouter(); // Initialize useRouter
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -17,6 +19,7 @@ const Profile = () => {
       } else {
         const errorData = await response.json();
         setError(errorData.message);
+        router.push("/auth/login");
       }
     };
 
@@ -86,7 +89,10 @@ const Profile = () => {
                       //   width: "20px",
                       // }}
                     >
-                      <Link href="/" className="block px-4 py-2 text-white ">
+                      <Link
+                        href="/admin/addbalance"
+                        className="block px-4 py-2 text-white "
+                      >
                         <Image
                           className="ml-5 "
                           src="/icons/transaction.png" // Replace with the path to your image

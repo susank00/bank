@@ -9,7 +9,6 @@ export const GET = authenticate(async (request) => {
     JSON.stringify({
       message: "Profile fetched successfully!",
       user: {
-        id: user.userId,
         email: user.email,
         username: user.username,
         accountNumber: user.accountNumber,

@@ -18,14 +18,14 @@ const Sidebar = () => {
       </button>
 
       <div
-        className={`fixed inset-0 z-30 bg-red-800 bg-opacity-50 transition-opacity md:hidden ${
+        className={`fixed inset-0 z-30 bg-red-200 bg-opacity-50 transition-opacity md:hidden ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={toggleSidebar}
       ></div>
 
       <nav
-        className={`absolute top-0 left-0 h-screen bg-gradient-to-br from-red-900  to-green-800 shadow-md transition-transform transform ${
+        className={`absolute top-0 left-0 h-screen bg-gradient-to-br from-red-300  to-green-700 shadow-md transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full "
         } md:relative md:translate-x-0 md:flex md:flex-col md:w-64`}
       >

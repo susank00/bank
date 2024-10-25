@@ -12,11 +12,21 @@ generator client {
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
-  accountNumber String  @unique
+  accountNumber String   @id
   username      String   @unique
   email         String   @unique
   password      String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  account       Account? // No need to specify fields and references here
+}
+
+model Account {
+  accountNumber String   @id
+  balance       Float    @default(0.0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [accountNumber], references: [accountNumber])
 }

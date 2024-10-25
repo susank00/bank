@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "@/Lib/Postgredb"; // Adjust the import based on your structure
 
-const JWT_SECRET = process.env.JWT_SECRET; // Use a strong secret
+const JWT_SECRET = process.env.JWT_SECRET; // Ensure your .env has a strong secret
 
 export async function POST(request) {
   try {
@@ -30,23 +30,26 @@ export async function POST(request) {
       );
     }
 
-    // Generate JWT token
+    // Generate JWT token using accountNumber instead of id
     const token = jwt.sign(
       {
-        userId: user.id,
+        accountNumber: user.accountNumber,
         email: user.email,
         username: user.username,
-        accountNumber: user.accountNumber,
       },
       JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "360s" }
     );
 
     // Set the token in cookies
     const response = new Response(
       JSON.stringify({
         message: "Login successful!",
-        user: { id: user.id, email: user.email, username: user.username },
+        user: {
+          accountNumber: user.accountNumber,
+          email: user.email,
+          username: user.username,
+        },
       }),
       {
         status: 200,
@@ -57,7 +60,7 @@ export async function POST(request) {
     // Set the JWT token as an HTTP-only cookie
     response.headers.append(
       "Set-Cookie",
-      `token=${token}; HttpOnly; Path=/; Max-Age=3600;SameSite=Lax;`
+      `token=${token}; HttpOnly; Path=/; Max-Age=3600; SameSite=Lax;`
     );
 
     return response;
