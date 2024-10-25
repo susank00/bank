@@ -109,7 +109,10 @@ const Profile = () => {
                   {/* <div className="bg-opacity-20 backdrop-blur-md border border-opacity-30 rounded-lg shadow-lg p-3 h-36"> */}
 
                   <div className="bg-opacity-20 backdrop-blur-md border border-opacity-30 rounded-lg shadow-lg p-3 h-36 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:bg-opacity-30">
-                    <Link href="/" className="block px-4 py-2 text-white ">
+                    <Link
+                      href="userfunction/moneytransfer"
+                      className="block px-4 py-2 text-white "
+                    >
                       <Image
                         className="ml-5 "
                         src="/icons/fd.png" // Replace with the path to your image
@@ -117,7 +120,7 @@ const Profile = () => {
                         width={60} // Set the width of the image
                         height={5} // Set the height of the image
                       />
-                      <p className="p-2 font-bold "> Fund Transfer</p>
+                      <p className="p-2 font-bold ">MoneyTransfer</p>
                     </Link>
                   </div>
                 </div>

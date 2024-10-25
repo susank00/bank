@@ -60,7 +60,7 @@ export async function POST(request) {
     // Set the JWT token as an HTTP-only cookie
     response.headers.append(
       "Set-Cookie",
-      `token=${token}; HttpOnly; Path=/; Max-Age=3600; SameSite=Lax;`
+      `token=${token}; HttpOnly; Path=/; Max-Age=360; SameSite=Lax;`
     );
 
     return response;

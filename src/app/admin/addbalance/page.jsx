@@ -9,6 +9,7 @@ const AddBalanceForm = () => {
   const [accountNumber, setAccountNumber] = useState("");
   const [amountToAdd, setAmountToAdd] = useState("");
   const [message, setMessage] = useState("");
+  const [username, setUserName] = useState("");
 
   useEffect(() => {
     // Redirect to login if the user is not authenticated
@@ -26,6 +27,7 @@ const AddBalanceForm = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        username,
         accountNumber,
         amountToAdd: parseFloat(amountToAdd),
       }),
@@ -35,6 +37,7 @@ const AddBalanceForm = () => {
     setMessage(data.message);
 
     if (response.ok) {
+      setUserName("");
       setAccountNumber("");
       setAmountToAdd("");
     }
@@ -49,6 +52,22 @@ const AddBalanceForm = () => {
       <div className="max-w-md mx-auto mt-8">
         <h2 className="text-lg font-bold mb-4">Add Balance</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label
+              htmlFor="accountNumber"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="accountNumber"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              required
+            />
+          </div>
           <div>
             <label
               htmlFor="accountNumber"
