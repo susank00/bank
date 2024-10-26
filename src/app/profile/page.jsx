@@ -4,11 +4,17 @@ import Sidebar from "../components/Sidebar";
 import Image from "next/image";
 import Link from "next/link"; // Next.js Link
 import { useRouter } from "next/navigation";
-
+import { useAuth } from "../context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter(); // Initialize useRouter
+  const [balance, setBalance] = useState("XXXXXX");
+  const { accountNumber } = useAuth(); // Get user information from your auth hook
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -33,7 +39,30 @@ const Profile = () => {
   if (!user) {
     return <p>Loading...</p>;
   }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(""); // Reset any previous errors
+    setBalance(null); // Reset balance
+    setLoading(true); // Set loading state
 
+    try {
+      const response = await fetch(
+        `/api/userinfo?accountNumber=${accountNumber}`
+      );
+      if (!response.ok) {
+        throw new Error(
+          (await response.json()).error || "Something went wrong"
+        );
+      }
+
+      const data = await response.json();
+      setBalance(data.balance);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false); // Reset loading state
+    }
+  };
   return (
     <>
       <Sidebar />
@@ -65,11 +94,27 @@ const Profile = () => {
                   <strong>Ac</strong> {user.accountNumber}
                   <div className="mt-16">
                     <p>amount Rs</p>
-                    <p>Available balance</p>
+                    {/* <p>Available balance</p>
+                     */}
+                    <p className="mt-4 text-green-500">Balance: {balance}</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p>interest rate</p>
+                  <button
+                    onClick={handleSubmit}
+                    type="button" // Change to 'button' since form submission is handled manually
+                    disabled={loading}
+                    className={`w-full py-2  ${
+                      loading ? " mt-32" : " mt-32"
+                    }  flex justify-center items-center`}
+                  >
+                    {loading ? (
+                      <FontAwesomeIcon icon={faEyeSlash} size="xl" /> // Closed eye icon
+                    ) : (
+                      <FontAwesomeIcon icon={faEye} size="xl" /> // Open eye icon
+                    )}
+                  </button>
                 </div>
               </div>
             </div>

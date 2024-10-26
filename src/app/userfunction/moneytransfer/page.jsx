@@ -95,9 +95,7 @@ export default function TransferForm() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">
-              Source Account Number:
-            </label>
+            <label className="block text-gray-700">Your Account Number:</label>
             <input
               type="text"
               name="sourceAccountNumber"
