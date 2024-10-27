@@ -49,67 +49,69 @@ const AddBalanceForm = () => {
   return (
     <>
       <Sidebar />
-      <div className="max-w-md mx-auto mt-8">
-        <h2 className="text-lg font-bold mb-4">Add Balance</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label
-              htmlFor="accountNumber"
-              className="block text-sm font-medium text-gray-700"
+      <div className="flex items-center  min-h-screen bg-gradient-to-br from-green-900  to-red-950 h-screen">
+        <div className="max-w-md mx-auto  bg-white p-12 rounded-md w-full ">
+          <h2 className="text-lg font-bold mb-4">Add Balance</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label
+                htmlFor="accountNumber"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="accountNumber"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="accountNumber"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Account Number
+              </label>
+              <input
+                type="text"
+                id="accountNumber"
+                value={accountNumber}
+                onChange={(e) => setAccountNumber(e.target.value)}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="amountToAdd"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Amount to Add
+              </label>
+              <input
+                type="number"
+                id="amountToAdd"
+                value={amountToAdd}
+                onChange={(e) => setAmountToAdd(e.target.value)}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2 rounded-md"
             >
-              Username
-            </label>
-            <input
-              type="text"
-              id="accountNumber"
-              value={username}
-              onChange={(e) => setUserName(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-              required
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="accountNumber"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Account Number
-            </label>
-            <input
-              type="text"
-              id="accountNumber"
-              value={accountNumber}
-              onChange={(e) => setAccountNumber(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-              required
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="amountToAdd"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Amount to Add
-            </label>
-            <input
-              type="number"
-              id="amountToAdd"
-              value={amountToAdd}
-              onChange={(e) => setAmountToAdd(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md"
-          >
-            Add Balance
-          </button>
-        </form>
-        {message && (
-          <p className="mt-4 text-center text-green-600">{message}</p>
-        )}
+              Add Balance
+            </button>
+          </form>
+          {message && (
+            <p className="mt-4 text-center text-green-600">{message}</p>
+          )}
+        </div>
       </div>
     </>
   );

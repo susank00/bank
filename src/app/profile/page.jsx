@@ -86,21 +86,22 @@ const Profile = () => {
             >
               {/* <h2 className="text-lg font-bold mb-2">Left Block</h2> */}
 
-              <div className="flex justify-between items-start">
-                <div>
+              <div className="flex justify-between items-start font-serif font-bold">
+                <div className="space-y-14">
                   <p>
                     <strong>Name:</strong> {user.username}
                   </p>
-                  <strong>Ac</strong> {user.accountNumber}
-                  <div className="mt-16">
-                    <p>amount Rs</p>
+                  <p>
+                    <strong>Ac/number:</strong> {user.accountNumber}
+                  </p>
+                  <div className="mt-8">
                     {/* <p>Available balance</p>
                      */}
                     <p className="mt-4 text-green-500">Balance: {balance}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p>interest rate</p>
+                  <p>Interest rate</p>
                   <button
                     onClick={handleSubmit}
                     type="button" // Change to 'button' since form submission is handled manually
